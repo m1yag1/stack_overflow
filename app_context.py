@@ -28,6 +28,15 @@ def create_app(package_name, settings=None):
 if __name__ == '__main__':
     app = create_app(__name__)
 
-    app.add_url_rule('/hello', view_func = MyClass.as_view('my_function'))
+    # Runs perfect
+    # app.add_url_rule('/hello', view_func = MyClass.as_view('my_function'))
+
+    # Causes the context error
+    current_app.add_url_rule('/hello', view_func = MyClass.as_view('my_function'))
+
+    """ EXAMPLE ERROR
+    raise RuntimeError('working outside of application context')
+        RuntimeError: working outside of application context
+    """
 
     app.run(debug=True)
